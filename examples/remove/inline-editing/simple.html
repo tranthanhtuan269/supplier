@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=no">
+	<title>Editor example - Simple inline editing</title>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.2.6/css/fixedColumns.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/autofill/2.3.3/css/autoFill.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="../../css/editor.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="../resources/syntax/shCore.css">
+	<link rel="stylesheet" type="text/css" href="../resources/demo.css">
+	<style type="text/css" class="init">
+	
+	</style>
+	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/autofill/2.3.3/js/dataTables.autoFill.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
+	<script type="text/javascript" language="javascript" src="../../js/dataTables.editor.min.js"></script>
+	<script type="text/javascript" language="javascript" src="../resources/syntax/shCore.js"></script>
+	<script type="text/javascript" language="javascript" src="../resources/demo.js"></script>
+	<script type="text/javascript" language="javascript" src="../resources/editor-demo.js"></script>
+	<script type="text/javascript" language="javascript" class="init">
+	
+
+
+var editor; // use a global for the submit and return data rendering in the examples
+
+$(document).ready(function() {
+	editor = new $.fn.dataTable.Editor( {
+		ajax: "../../controllers/staff.php",
+		table: "#example",
+		fields: [ {
+				label: "First name:",
+				name: "first_name"
+			}, {
+				label: "Last name:",
+				name: "last_name"
+			}, {
+				label: "Source Language:",
+				name: "source_language"
+			}, {
+				label: "Target Language:",
+				name: "target_language"
+			}, {
+				label: "Type:",
+				name: "type"
+			}, {
+				label: "Service:",
+				name: "service"
+			}, {
+				label: "Expertise:",
+				name: "expertise"
+			}, {
+				label: "Rate:",
+				name: "rate"
+			}, {
+				label: "Unit:",
+				name: "unit"
+			}, {
+				label: "Native Language:",
+				name: "native_language"
+			}, {
+				label: "Status:",
+				name: "status"
+			}, {
+				label: "Location:",
+				name: "location"
+			}, {
+				label: "Phone:",
+				name: "phone"
+			}, {
+				label: "Email:",
+				name: "email"
+			}, {
+				label: "Skype:",
+				name: "skype"
+			}, {
+				label: "Extension:",
+				name: "extn"
+			}, {
+				label: "Gender:",
+				name: "gender"
+			}, {
+				label: "DOB:",
+				name: "dob",
+				type: "datetime",
+				opts:  {
+                    minDate: new Date('1970-01-01'),
+                    maxDate: new Date('2006-01-01')
+                }
+			}, {
+				label: "Availability:",
+				name: "availability"
+			}, {
+				label: "Rating:",
+				name: "rating"
+			}, {
+				label: "Link CV:",
+				name: "link_cv"
+			}, {
+				label: "Salary:",
+				name: "salary"
+			}, {
+				label: "Lastest Support:",
+				name: "lastest_support",
+				type: "datetime"
+			}
+		]
+	} );
+
+	// Activate an inline edit on click of a table cell
+	$('#example').on( 'click', 'tbody td:not(:first-child)', function (e) {
+		editor.inline( this );
+	} );
+
+	$('#example').DataTable( {
+		fixedHeader: true,
+		fixedColumns: {
+            leftColumns: 3
+        },
+        scrollX: true,
+		dom: "Bfrtip",
+		ajax: "../../controllers/staff.php",
+		order: [[ 1, 'asc' ]],
+		columns: [
+			{
+				data: null,
+				defaultContent: '',
+				className: 'select-checkbox',
+				orderable: false
+			},
+			{ data: "first_name" },
+			{ data: "last_name" },
+			{ data: "source_language" },
+			{ data: "target_language" },
+			{ data: "type" },
+			{ data: "service" },
+			{ data: "expertise" },
+			{ data: "rate" },
+			{ data: "unit" },
+			{ data: "native_language" },
+			{ data: "status" },
+			{ data: "location" },
+			{ data: "phone" },
+			{ data: "email" },
+			{ data: "skype" },
+			{ data: "gender" },
+			{ data: "dob" },
+			{ data: "availability" },
+			{ data: "rating" },
+			{ data: "link_cv" },
+			{ data: "salary", render: $.fn.dataTable.render.number( ',', '.', 0, '$' ) },
+			{ data: "lastest_support" }
+		],
+		select: {
+			style:    'os',
+			selector: 'td:first-child'
+		},
+        autoFill: {
+            editor:  editor
+        },
+		buttons: [
+			{ extend: "create", editor: editor },
+			{ extend: "edit",   editor: editor },
+			{ extend: "remove", editor: editor }
+		]
+	} );
+} );
+
+
+
+	</script>
+</head>
+<body class="dt-example php">
+	<div class="container-fuild">
+		<section>
+			<h1>Editor example <span>Simple inline editing</span></h1>
+			<div class="demo-html"></div>
+			<table id="example" class="display" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th></th>
+						<th width="200px">First name</th>
+						<th width="200px">Last name</th>
+						<th width="200px">Source Language</th>
+						<th width="200px">Target Language</th>
+						<th width="200px">Type</th>
+						<th width="200px">Service</th>
+						<th width="200px">Expertise</th>
+						<th width="200px">Rate</th>
+						<th width="200px">Unit</th>
+						<th width="200px">Native Language</th>
+						<th width="200px">Status</th>
+						<th width="200px">Location</th>
+						<th width="200px">Phone</th>
+						<th width="200px">Email</th>
+						<th width="200px">Skype</th>
+						<th width="200px">Gender</th>
+						<th width="200px">DOB</th>
+						<th width="200px">Availability</th>
+						<th width="200px">Rating</th>
+						<th width="200px">Link CV</th>
+						<th width="200px">Salary</th>
+						<th width="200px">Lastest Support</th>
+					</tr>
+				</thead>
+			</table>
+		</section>
+	</div>
+</body>
+</html>
