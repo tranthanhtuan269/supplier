@@ -64,9 +64,8 @@ if ( window.$ ) {
 				if ( url && url.indexOf('php') !== -1 ) {
 					$('ul.tabs li').eq(3).html('Server script').css('display', 'block');
 					server.find('p').eq(0).html( 'The following script is used by DataTables and Editor to process the data requests sent by the client on the server-side.' );
-
 					$.ajax( {
-						url: '../resources/examples.php',
+						url: 'examples/resources/examples.php',
 						data: {
 							src: table.ajax.url()
 						},

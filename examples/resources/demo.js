@@ -98,7 +98,7 @@ if ( window.$ ) {
 						return;
 					}
 					$.ajax( {
-						url: '../resources/examples.php',
+						url: 'examples.php',
 						data: {
 							src: settings.sAjaxSource || settings.ajax.url || settings.ajax
 						},

@@ -21,6 +21,7 @@ use
 // Build our Editor instance and process the data coming from _POST
 Editor::inst( $db, 'datatables_demo' )
 	->fields(
+		Field::inst( 'id' ),
 		Field::inst( 'first_name' )
 			->validator( Validate::notEmpty( ValidateOptions::inst()
 				->message( 'A first name is required' )	
